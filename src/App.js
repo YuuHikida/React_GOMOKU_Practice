@@ -73,29 +73,42 @@ function Square({value,onSquareClick}){
 
 export default function Game(){
   const [xIsNext,setXIsNext] = useState(true);
-  //操作履歴が欲しい
   const [history,setHistory] = useState([Array(9).fill(null)]);
+
   const currentSquares  = history[ history.length -1 ];
 
-  function handlePlay(nextSquares)
-  {
-    //todo
-    const a = 10;
-    const b = 10;
-    const c = 10;
+  function handlePlay(nextSquares) {
+    /*↓スプレッド構文 */
+    setHistory([...history, nextSquares]);
+    setXIsNext(!xIsNext);
   }
-  return(
+
+  function jumpTo(nextMove){
+    //TODO
+  }
+  const moves = history.map((squares,move)=>{
+    let description;
+    if( move > 0 ){
+      description = 'Go to move #' + move;
+    }else{
+      description = 'Go to game start';
+    }
+    return(
+      <li>
+        <button onClick={()=>jumpTo(move)}>{description}</button>
+      </li>
+    )
+  })
+  return (
     <div className="game">
-      return(
-        <div className="game-board">
-          <Board xIsNext={xIsNext} squares={currentSquares} onplay ={handlePlay}/>
-        </div>
-        <div className="game-info">
-          <oi>{/*todo*/}</oi>
-        </div>
-      )
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{moves}</ol>
+      </div>
     </div>
-  )
+  );
 }
 
 function calculateWinner(squares) {
