@@ -80,6 +80,7 @@ export default function Game(){
   function handlePlay(nextSquares)
   {
     //todo
+    const a = 10;
   }
   return(
     <div className="game">
