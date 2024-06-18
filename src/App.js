@@ -82,6 +82,7 @@ export default function Game(){
     //todo
     const a = 10;
     const b = 10;
+    const c = 10;
   }
   return(
     <div className="game">
