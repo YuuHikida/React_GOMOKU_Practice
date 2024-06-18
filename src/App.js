@@ -15,9 +15,9 @@ function Square({value,onSquareClick}){
   </>
   );
 }
-export default function Board() {
-  const [xIsNext,setXIsNext]   = useState(true); 
-  const [squares,setSequares] = useState(Array(9).fill(null));//nullの配列が9個
+ function Board({ xIsNext, squares, onPlay}) {
+  // const [xIsNext,setXIsNext]  = useState(true); 
+  // const [squares,setSequares] = useState(Array(9).fill(null));//nullの配列が9個
   
   function handleClick(i){
     if(squares[i] || calculateWinner(squares)){
@@ -33,8 +33,8 @@ export default function Board() {
       {
         nextSquares[i] = "O";
       }
-    setSequares(nextSquares);
-    setXIsNext(!xIsNext); 
+    
+    onPlay(nextSquares); 
   }
 
     //勝利判定
@@ -69,6 +69,30 @@ export default function Board() {
   
   </>
   );
+}
+
+export default function Game(){
+  const [xIsNext,setXIsNext] = useState(true);
+  //操作履歴が欲しい
+  const [history,setHistory] = useState([Array(9).fill(null)]);
+  const currentSquares  = history[ history.length -1 ];
+
+  function handlePlay(nextSquares)
+  {
+    //todo
+  }
+  return(
+    <div className="game">
+      return(
+        <div className="game-board">
+          <Board xIsNext={xIsNext} squares={currentSquares} onplay ={handlePlay}/>
+        </div>
+        <div className="game-info">
+          <oi>{/*todo*/}</oi>
+        </div>
+      )
+    </div>
+  )
 }
 
 function calculateWinner(squares) {
