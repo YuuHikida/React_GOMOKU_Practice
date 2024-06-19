@@ -83,7 +83,7 @@ export default function Game(){
     setHistory( nextHistory );
     setCurrentMove( nextHistory.length -1 );
   }
-
+  //click時起動
   function jumpTo(nextMove){
     setCurrentMove(nextMove);
   }
